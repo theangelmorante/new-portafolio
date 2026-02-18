@@ -4,13 +4,13 @@ import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 
 const navItems = [
-  { label: 'Inicio', href: '#hero' },
-  { label: 'Sobre Mí', href: '#about' },
-  { label: 'Habilidades', href: '#skills' },
-  { label: 'Proyectos', href: '#projects' },
-  { label: 'Experiencia', href: '#experience' },
-  { label: 'Educación', href: '#education' },
-  { label: 'Certificaciones', href: '#certifications' },
+  { label: 'Home', href: '#hero' },
+  { label: 'About Me', href: '#about' },
+  { label: 'Skills', href: '#skills' },
+  { label: 'Projects', href: '#projects' },
+  { label: 'Experience', href: '#experience' },
+  { label: 'Education', href: '#education' },
+  { label: 'Certifications', href: '#certifications' },
 ]
 
 export const Navigation: React.FC = () => {
@@ -38,7 +38,7 @@ export const Navigation: React.FC = () => {
             href="/"
             className="text-cyber-cyan font-mono font-bold text-xl uppercase tracking-wider cyber-text-glow hover:text-cyber-green transition-colors"
           >
-            Portfolio
+            Angel Morante
           </Link>
 
           {/* Desktop Menu */}
@@ -52,12 +52,12 @@ export const Navigation: React.FC = () => {
                 {item.label}
               </a>
             ))}
-            <Link
+            {/* <Link
               href="/admin"
               className="text-cyber-magenta hover:text-cyber-purple font-mono text-sm uppercase tracking-wider transition-colors"
             >
               Admin
-            </Link>
+            </Link> */}
           </div>
 
           {/* Mobile Menu Button */}

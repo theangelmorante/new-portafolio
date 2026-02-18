@@ -66,6 +66,7 @@ export interface PersonalInfo {
     github?: string
     linkedin?: string
     twitter?: string
+    instagram?: string
     website?: string
   }
 }

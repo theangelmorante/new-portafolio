@@ -20,6 +20,7 @@ export const PersonalInfoForm: React.FC = () => {
     github: '',
     linkedin: '',
     twitter: '',
+    instagram: '',
     website: '',
   })
   const [avatarFile, setAvatarFile] = useState<File | null>(null)
@@ -39,6 +40,7 @@ export const PersonalInfoForm: React.FC = () => {
         github: personalInfo.socialLinks?.github || '',
         linkedin: personalInfo.socialLinks?.linkedin || '',
         twitter: personalInfo.socialLinks?.twitter || '',
+        instagram: personalInfo.socialLinks?.instagram || '',
         website: personalInfo.socialLinks?.website || '',
       })
       if (personalInfo.avatarUrl) {
@@ -73,6 +75,14 @@ export const PersonalInfoForm: React.FC = () => {
         avatarUrl = await uploadImage(avatarFile, imagePath)
       }
 
+      // Construir socialLinks solo con campos que tienen valores
+      const socialLinks: Record<string, string> = {}
+      if (formData.github.trim()) socialLinks.github = formData.github.trim()
+      if (formData.linkedin.trim()) socialLinks.linkedin = formData.linkedin.trim()
+      if (formData.twitter.trim()) socialLinks.twitter = formData.twitter.trim()
+      if (formData.instagram.trim()) socialLinks.instagram = formData.instagram.trim()
+      if (formData.website.trim()) socialLinks.website = formData.website.trim()
+
       const personalInfoData = {
         name: formData.name,
         title: formData.title,
@@ -80,12 +90,7 @@ export const PersonalInfoForm: React.FC = () => {
         email: formData.email,
         location: formData.location,
         avatarUrl,
-        socialLinks: {
-          github: formData.github || undefined,
-          linkedin: formData.linkedin || undefined,
-          twitter: formData.twitter || undefined,
-          website: formData.website || undefined,
-        },
+        socialLinks: Object.keys(socialLinks).length > 0 ? socialLinks : {},
       }
 
       await updatePersonalInfo(personalInfoData)
@@ -198,13 +203,22 @@ export const PersonalInfoForm: React.FC = () => {
           />
 
           <Input
-            label="Website (opcional)"
+            label="Instagram (opcional)"
             type="url"
-            value={formData.website}
-            onChange={(e) => setFormData({ ...formData, website: e.target.value })}
+            value={formData.instagram}
+            onChange={(e) => setFormData({ ...formData, instagram: e.target.value })}
+            placeholder="https://instagram.com/yourusername"
             disabled={loading}
           />
         </div>
+
+        <Input
+          label="Website (opcional)"
+          type="url"
+          value={formData.website}
+          onChange={(e) => setFormData({ ...formData, website: e.target.value })}
+          disabled={loading}
+        />
 
         {error && (
           <p className="text-red-500 text-sm font-mono">{error}</p>

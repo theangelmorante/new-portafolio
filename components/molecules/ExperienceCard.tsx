@@ -8,7 +8,7 @@ interface ExperienceCardProps {
 
 export const ExperienceCard: React.FC<ExperienceCardProps> = ({ experience }) => {
   const formatDate = (date: string) => {
-    return new Date(date).toLocaleDateString('es-ES', {
+    return new Date(date).toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'short',
     })
@@ -24,7 +24,7 @@ export const ExperienceCard: React.FC<ExperienceCardProps> = ({ experience }) =>
             {experience.position}
           </h3>
           <span className="text-cyber-cyan/60 text-sm font-mono">
-            {formatDate(experience.startDate)} - {experience.endDate ? formatDate(experience.endDate) : 'Presente'}
+            {formatDate(experience.startDate)} - {experience.endDate ? formatDate(experience.endDate) : 'Present'}
           </span>
         </div>
         

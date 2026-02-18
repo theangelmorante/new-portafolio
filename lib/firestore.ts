@@ -4,6 +4,7 @@ import {
   doc,
   getDoc,
   addDoc,
+  setDoc,
   updateDoc,
   deleteDoc,
   query,
@@ -19,6 +20,15 @@ import {
   Skill,
   PersonalInfo,
 } from "@/types";
+
+/** Removes undefined values from an object. Firestore does not accept undefined. */
+function removeUndefined<T extends Record<string, unknown>>(
+  obj: T
+): { [k: string]: T[keyof T] } {
+  return Object.fromEntries(
+    Object.entries(obj).filter(([, v]) => v !== undefined)
+  ) as { [k: string]: T[keyof T] };
+}
 
 // Projects
 export async function getProjects(): Promise<Project[]> {
@@ -40,11 +50,12 @@ export async function getProjects(): Promise<Project[]> {
 export async function addProject(
   project: Omit<Project, "id">,
 ): Promise<string> {
-  const docRef = await addDoc(collection(db, "projects"), {
+  const data = removeUndefined({
     ...project,
     createdAt: Timestamp.now(),
     updatedAt: Timestamp.now(),
   });
+  const docRef = await addDoc(collection(db, "projects"), data);
   return docRef.id;
 }
 
@@ -52,10 +63,11 @@ export async function updateProject(
   id: string,
   project: Partial<Project>,
 ): Promise<void> {
-  await updateDoc(doc(db, "projects", id), {
+  const data = removeUndefined({
     ...project,
     updatedAt: Timestamp.now(),
   });
+  await updateDoc(doc(db, "projects", id), data);
 }
 
 export async function deleteProject(id: string): Promise<void> {
@@ -85,11 +97,12 @@ export async function getExperiences(): Promise<Experience[]> {
 export async function addExperience(
   experience: Omit<Experience, "id">,
 ): Promise<string> {
-  const docRef = await addDoc(collection(db, "experiences"), {
+  const data = removeUndefined({
     ...experience,
     createdAt: Timestamp.now(),
     updatedAt: Timestamp.now(),
   });
+  const docRef = await addDoc(collection(db, "experiences"), data);
   return docRef.id;
 }
 
@@ -97,10 +110,11 @@ export async function updateExperience(
   id: string,
   experience: Partial<Experience>,
 ): Promise<void> {
-  await updateDoc(doc(db, "experiences", id), {
+  const data = removeUndefined({
     ...experience,
     updatedAt: Timestamp.now(),
   });
+  await updateDoc(doc(db, "experiences", id), data);
 }
 
 export async function deleteExperience(id: string): Promise<void> {
@@ -132,11 +146,12 @@ export async function getCertifications(): Promise<Certification[]> {
 export async function addCertification(
   certification: Omit<Certification, "id">,
 ): Promise<string> {
-  const docRef = await addDoc(collection(db, "certifications"), {
+  const data = removeUndefined({
     ...certification,
     createdAt: Timestamp.now(),
     updatedAt: Timestamp.now(),
   });
+  const docRef = await addDoc(collection(db, "certifications"), data);
   return docRef.id;
 }
 
@@ -144,10 +159,11 @@ export async function updateCertification(
   id: string,
   certification: Partial<Certification>,
 ): Promise<void> {
-  await updateDoc(doc(db, "certifications", id), {
+  const data = removeUndefined({
     ...certification,
     updatedAt: Timestamp.now(),
   });
+  await updateDoc(doc(db, "certifications", id), data);
 }
 
 export async function deleteCertification(id: string): Promise<void> {
@@ -176,11 +192,12 @@ export async function getEducation(): Promise<Education[]> {
 export async function addEducation(
   education: Omit<Education, "id">,
 ): Promise<string> {
-  const docRef = await addDoc(collection(db, "education"), {
+  const data = removeUndefined({
     ...education,
     createdAt: Timestamp.now(),
     updatedAt: Timestamp.now(),
   });
+  const docRef = await addDoc(collection(db, "education"), data);
   return docRef.id;
 }
 
@@ -188,10 +205,11 @@ export async function updateEducation(
   id: string,
   education: Partial<Education>,
 ): Promise<void> {
-  await updateDoc(doc(db, "education", id), {
+  const data = removeUndefined({
     ...education,
     updatedAt: Timestamp.now(),
   });
+  await updateDoc(doc(db, "education", id), data);
 }
 
 export async function deleteEducation(id: string): Promise<void> {
@@ -214,7 +232,8 @@ export async function getSkills(): Promise<Skill[]> {
 }
 
 export async function addSkill(skill: Omit<Skill, "id">): Promise<string> {
-  const docRef = await addDoc(collection(db, "skills"), skill);
+  const data = removeUndefined(skill as Record<string, unknown>);
+  const docRef = await addDoc(collection(db, "skills"), data);
   return docRef.id;
 }
 
@@ -222,7 +241,8 @@ export async function updateSkill(
   id: string,
   skill: Partial<Skill>,
 ): Promise<void> {
-  await updateDoc(doc(db, "skills", id), skill);
+  const data = removeUndefined(skill as Record<string, unknown>);
+  await updateDoc(doc(db, "skills", id), data as Record<string, import("firebase/firestore").FieldValue>);
 }
 
 export async function deleteSkill(id: string): Promise<void> {
@@ -245,7 +265,19 @@ export async function getPersonalInfo(): Promise<PersonalInfo | null> {
 }
 
 export async function updatePersonalInfo(info: PersonalInfo): Promise<void> {
-  await updateDoc(doc(db, "personalInfo", "main"), {
-    ...info,
-  } as any);
+  const docRef = doc(db, "personalInfo", "main");
+  const data: Record<string, unknown> = {
+    name: info.name,
+    title: info.title,
+    bio: info.bio,
+    email: info.email,
+    location: info.location,
+  };
+  if (info.avatarUrl != null) data.avatarUrl = info.avatarUrl;
+  if (info.socialLinks != null && Object.keys(info.socialLinks).length > 0) {
+    data.socialLinks = Object.fromEntries(
+      Object.entries(info.socialLinks).filter(([, v]) => v != null && v !== "")
+    );
+  }
+  await setDoc(docRef, data, { merge: true });
 }

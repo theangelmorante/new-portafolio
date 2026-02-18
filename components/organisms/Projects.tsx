@@ -13,9 +13,9 @@ export const Projects: React.FC = () => {
     return (
       <Section id="projects">
         <Heading level={2} className="mb-12 text-center">
-          Proyectos
+          Projects
         </Heading>
-        <p className="text-center text-cyber-cyan/60">Cargando proyectos...</p>
+        <p className="text-center text-cyber-cyan/60">Loading projects...</p>
       </Section>
     )
   }
@@ -23,11 +23,11 @@ export const Projects: React.FC = () => {
   return (
     <Section id="projects">
       <Heading level={2} className="mb-12 text-center">
-        Proyectos
+        Projects
       </Heading>
       
       {projects.length === 0 ? (
-        <p className="text-center text-cyber-cyan/60">No hay proyectos disponibles</p>
+        <p className="text-center text-cyber-cyan/60">No projects available</p>
       ) : (
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects.map((project) => (

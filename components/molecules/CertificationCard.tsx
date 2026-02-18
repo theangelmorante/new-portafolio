@@ -9,7 +9,7 @@ interface CertificationCardProps {
 
 export const CertificationCard: React.FC<CertificationCardProps> = ({ certification }) => {
   const formatDate = (date: string) => {
-    return new Date(date).toLocaleDateString('es-ES', {
+    return new Date(date).toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'long',
     })
@@ -37,8 +37,8 @@ export const CertificationCard: React.FC<CertificationCardProps> = ({ certificat
       </p>
       
       <p className="text-cyber-green/70 text-xs font-mono mb-4">
-        Emitido: {formatDate(certification.issueDate)}
-        {certification.expiryDate && ` • Expira: ${formatDate(certification.expiryDate)}`}
+        Issued: {formatDate(certification.issueDate)}
+        {certification.expiryDate && ` • Expires: ${formatDate(certification.expiryDate)}`}
       </p>
       
       {certification.credentialUrl && (
@@ -48,7 +48,7 @@ export const CertificationCard: React.FC<CertificationCardProps> = ({ certificat
           rel="noopener noreferrer"
           className="text-cyber-green hover:text-cyber-cyan text-xs font-mono underline transition-colors"
         >
-          Ver Credencial
+          View Credential
         </a>
       )}
     </Card>

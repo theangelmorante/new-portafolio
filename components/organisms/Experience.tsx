@@ -13,9 +13,9 @@ export const Experience: React.FC = () => {
     return (
       <Section id="experience">
         <Heading level={2} className="mb-12 text-center">
-          Experiencia Profesional
+          Professional Experience
         </Heading>
-        <p className="text-center text-cyber-cyan/60">Cargando experiencias...</p>
+        <p className="text-center text-cyber-cyan/60">Loading experience...</p>
       </Section>
     )
   }
@@ -23,11 +23,11 @@ export const Experience: React.FC = () => {
   return (
     <Section id="experience">
       <Heading level={2} className="mb-12 text-center">
-        Experiencia Profesional
+        Professional Experience
       </Heading>
       
       {experiences.length === 0 ? (
-        <p className="text-center text-cyber-cyan/60">No hay experiencias disponibles</p>
+        <p className="text-center text-cyber-cyan/60">No experience available</p>
       ) : (
         <div className="space-y-6">
           {experiences.map((experience) => (

@@ -20,10 +20,10 @@ export const Skills: React.FC = () => {
   const categoryLabels: Record<string, string> = {
     frontend: 'Frontend',
     backend: 'Backend',
-    database: 'Base de Datos',
+    database: 'Database',
     devops: 'DevOps',
-    tools: 'Herramientas',
-    other: 'Otros',
+    tools: 'Tools',
+    other: 'Other',
   }
 
   const levelColors: Record<string, string> = {
@@ -36,7 +36,7 @@ export const Skills: React.FC = () => {
   return (
     <Section id="skills">
       <Heading level={2} className="mb-12 text-center">
-        Habilidades
+        Skills
       </Heading>
       
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">

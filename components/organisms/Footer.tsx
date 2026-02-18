@@ -10,7 +10,7 @@ export const Footer: React.FC = () => {
     <footer className="border-t border-cyber-cyan/30 py-8 px-4">
       <div className="max-w-7xl mx-auto text-center">
         <p className="text-cyber-cyan/60 font-mono text-sm mb-4">
-          © {new Date().getFullYear()} {personalInfo?.name || 'Portfolio'}. Todos los derechos reservados.
+          © {new Date().getFullYear()} {personalInfo?.name || 'Portfolio'}. All rights reserved.
         </p>
         
         {personalInfo?.socialLinks && (
@@ -43,6 +43,16 @@ export const Footer: React.FC = () => {
                 className="text-cyber-cyan/60 hover:text-cyber-cyan transition-colors font-mono text-sm"
               >
                 Twitter
+              </a>
+            )}
+            {personalInfo.socialLinks.instagram && (
+              <a
+                href={personalInfo.socialLinks.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-cyber-cyan/60 hover:text-cyber-cyan transition-colors font-mono text-sm"
+              >
+                Instagram
               </a>
             )}
           </div>

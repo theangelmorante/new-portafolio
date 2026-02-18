@@ -31,6 +31,10 @@ const config: Config = {
       animation: {
         'glow-pulse': 'glow-pulse 2s ease-in-out infinite',
         'scan-line': 'scan-line 3s linear infinite',
+        'float': 'float 15s ease-in-out infinite',
+        'float-delayed': 'float 18s ease-in-out infinite 2s',
+        'float-slow': 'float 22s ease-in-out infinite 1s',
+        'scan': 'scan 8s linear infinite',
       },
       keyframes: {
         'glow-pulse': {
@@ -40,6 +44,15 @@ const config: Config = {
         'scan-line': {
           '0%': { transform: 'translateY(-100%)' },
           '100%': { transform: 'translateY(100vh)' },
+        },
+        'float': {
+          '0%, 100%': { transform: 'translate(0, 0) scale(1)' },
+          '33%': { transform: 'translate(30px, -30px) scale(1.05)' },
+          '66%': { transform: 'translate(-20px, 20px) scale(0.95)' },
+        },
+        'scan': {
+          '0%': { transform: 'translateY(-100%)' },
+          '100%': { transform: 'translateY(100%)' },
         },
       },
     },

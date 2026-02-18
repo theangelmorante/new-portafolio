@@ -8,7 +8,7 @@ interface EducationCardProps {
 
 export const EducationCard: React.FC<EducationCardProps> = ({ education }) => {
   const formatDate = (date: string) => {
-    return new Date(date).toLocaleDateString('es-ES', {
+    return new Date(date).toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'short',
     })
@@ -29,7 +29,7 @@ export const EducationCard: React.FC<EducationCardProps> = ({ education }) => {
       </p>
       
       <p className="text-cyber-magenta/70 text-xs font-mono mb-3">
-        {formatDate(education.startDate)} - {education.endDate ? formatDate(education.endDate) : 'Presente'}
+        {formatDate(education.startDate)} - {education.endDate ? formatDate(education.endDate) : 'Present'}
       </p>
       
       {education.description && (

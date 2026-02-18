@@ -13,9 +13,9 @@ export const Certifications: React.FC = () => {
     return (
       <Section id="certifications">
         <Heading level={2} className="mb-12 text-center">
-          Certificaciones
+          Certifications
         </Heading>
-        <p className="text-center text-cyber-cyan/60">Cargando certificaciones...</p>
+        <p className="text-center text-cyber-cyan/60">Loading certifications...</p>
       </Section>
     )
   }
@@ -23,11 +23,11 @@ export const Certifications: React.FC = () => {
   return (
     <Section id="certifications">
       <Heading level={2} className="mb-12 text-center">
-        Certificaciones
+        Certifications
       </Heading>
       
       {certifications.length === 0 ? (
-        <p className="text-center text-cyber-cyan/60">No hay certificaciones disponibles</p>
+        <p className="text-center text-cyber-cyan/60">No certifications available</p>
       ) : (
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {certifications.map((cert) => (

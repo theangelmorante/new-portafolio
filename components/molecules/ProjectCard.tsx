@@ -47,7 +47,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
             onClick={() => window.open(project.url, '_blank')}
             className="flex-1"
           >
-            Ver Proyecto
+            View Project
           </Button>
         )}
         {project.githubUrl && (
