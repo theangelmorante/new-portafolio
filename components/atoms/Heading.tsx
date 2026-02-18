@@ -28,7 +28,7 @@ export const Heading: React.FC<HeadingProps> = ({
     green: 'cyber-text-glow-green',
   }
 
-  const Tag = `h${level}` as keyof JSX.IntrinsicElements
+  const Tag = `h${level}` as keyof React.JSX.IntrinsicElements
 
   return (
     <Tag

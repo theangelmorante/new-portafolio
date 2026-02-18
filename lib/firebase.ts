@@ -12,6 +12,7 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 }
 
+// Inicializar Firebase solo en el cliente
 let app: FirebaseApp
 let db: Firestore
 let storage: FirebaseStorage
@@ -27,6 +28,13 @@ if (typeof window !== 'undefined') {
   db = getFirestore(app)
   storage = getStorage(app)
   auth = getAuth(app)
+} else {
+  // En el servidor, crear objetos dummy para satisfacer TypeScript
+  // Estos nunca se usarán porque Firebase solo se usa en componentes 'use client'
+  app = {} as FirebaseApp
+  db = {} as Firestore
+  storage = {} as FirebaseStorage
+  auth = {} as Auth
 }
 
 export { db, storage, auth }
