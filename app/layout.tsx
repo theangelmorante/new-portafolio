@@ -4,7 +4,7 @@ import { PortfolioProvider } from '@/context/PortfolioContext'
 import { AuthProvider } from '@/context/AuthContext'
 
 export const metadata: Metadata = {
-  title: 'Portfolio | Cyber Developer',
+  title: 'Portfolio | Angel Morante',
   description: 'Personal portfolio showcasing projects, skills, and professional experience',
 }
 
